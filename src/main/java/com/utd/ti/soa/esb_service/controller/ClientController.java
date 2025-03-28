@@ -37,7 +37,7 @@ public class ClientController {
         }
          
         String response = webClient.post()
-            .uri("http://localhost:5003/app/clients/create")
+            .uri("http://clients.railway.internal:3001/app/clients/create")
             .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .body(BodyInserters.fromValue(client))
             .retrieve()
@@ -58,7 +58,7 @@ public class ClientController {
         }
 
         String response = webClient.get()
-            .uri("http://localhost:5003/app/clients/all")
+            .uri("http://clients.railway.internal:3001/app/clients/all")
             .retrieve()
             .bodyToMono(String.class)
             .doOnError(error -> System.out.println("Error: " + error.getMessage()))
@@ -80,7 +80,7 @@ public class ClientController {
         }
 
         String response = webClient.patch() 
-            .uri("http://localhost:5003/app/clients/update/" + id)   
+            .uri("http://clients.railway.internal:3001/app/clients/update/" + id)   
             .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .body(BodyInserters.fromValue(client))
             .retrieve()
@@ -102,7 +102,7 @@ public class ClientController {
         }
 
         String response = webClient.patch() 
-            .uri("http://localhost:5003/app/clients/delete/" + id)  
+            .uri("http://clients.railway.internal:3001/app/clients/delete/" + id)  
             .retrieve()
             .bodyToMono(String.class)
             .doOnError(error -> System.out.println("Error: " + error.getMessage()))
