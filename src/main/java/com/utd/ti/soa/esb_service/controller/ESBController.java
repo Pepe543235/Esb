@@ -44,7 +44,7 @@ public class ESBController {
     }
         try {
             String response = webClient.post()
-                .uri("http://user.railway.internal:3001/api/users")
+                .uri("http://user.railway.internal:3001/api/users/")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(BodyInserters.fromValue(user))
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
@@ -101,7 +101,7 @@ public class ESBController {
 
         try {
             String response = webClient.patch()
-                .uri("http://localhost:3003/api/users/update/" + id)
+                .uri("http://users.railway.internal:3001/api/users/update/" + id)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(BodyInserters.fromValue(user))
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
@@ -131,7 +131,7 @@ public class ESBController {
 
         try {
             String response = webClient.patch()
-                .uri("http://localhost:3003/api/users/deletedstatus/" + id)
+                .uri("http://users.railway.internal:3001/api/users/deletedstatus/" + id)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
                 .doOnError(error -> System.out.println("Error: " + error.getMessage()))
@@ -159,7 +159,7 @@ public class ESBController {
     }
         try {
             String response = webClient.post()
-                .uri("http://localhost:3001/api/clients/createClient")
+                .uri("http://clients.railway.internal:3001/api/clients/createClient")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(BodyInserters.fromValue(client))
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
