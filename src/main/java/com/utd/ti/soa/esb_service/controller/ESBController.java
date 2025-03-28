@@ -46,8 +46,10 @@ public class ESBController {
             String response = webClient.post()
                 .uri("http://user.railway.internal:3001/api/users/")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .body(BodyInserters.fromValue(user))
-                .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
+                .header(HttpHeaders.AUTHORIZATION, token)
+                .bodyValue(user)
+                .retrieve()
+                .bodyToMono(String.class)
                 .doOnError(error -> System.out.println("Error: " + error.getMessage()))
                 .block();
 
