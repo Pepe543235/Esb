@@ -74,7 +74,7 @@ public class ESBController {
 
         try {
             String response = webClient.get()
-                .uri("http://users.railway.internal:3001/api/user/all")
+                .uri("https://users-production-ec69.up.railway.app/api/user/all")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
                 .bodyToMono(String.class)
