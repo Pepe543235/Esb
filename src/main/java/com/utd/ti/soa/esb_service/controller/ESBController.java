@@ -44,7 +44,7 @@ public class ESBController {
     }
         try {
             String response = webClient.post()
-                .uri("http://localhost:3003/api/users/newuser")
+                .uri("http://user.railway.internal:3001/api/users")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(BodyInserters.fromValue(user))
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
@@ -72,7 +72,7 @@ public class ESBController {
 
         try {
             String response = webClient.get()
-                .uri("http://user-service:3002/api/users/getuser")
+                .uri("http://user.railway.internal:3001/api/users/getuser")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
                 .doOnError(error -> System.out.println("Error: " + error.getMessage()))
