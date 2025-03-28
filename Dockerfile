@@ -1,9 +1,18 @@
-FROM openjdk:8-jdk-alpine
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
-#Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-COPY target/*.jar app.jar
+COPY pom.xml ,
+
+COPY src ./src
+
+RUN mvn clean package -DskipTest
+
+FROM openjdk:8-jdk-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app/target/*.jar app.jar
 
 EXPOSE 8081
 
