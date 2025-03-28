@@ -44,7 +44,7 @@ public class ESBController {
     }
         try {
             String response = webClient.post()
-                .uri("http://users.railway.internal:3001/api/users/")
+                .uri("http://users.railway.internal:3001/api/user/")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .header(HttpHeaders.AUTHORIZATION, token)
                 .bodyValue(user)
@@ -74,7 +74,7 @@ public class ESBController {
 
         try {
             String response = webClient.get()
-                .uri("http://users.railway.internal:3001/api/users/all")
+                .uri("http://users.railway.internal:3001/api/user/all")
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
                 .bodyToMono(String.class)
@@ -104,7 +104,7 @@ public class ESBController {
 
         try {
             String response = webClient.patch()
-                .uri("http://users.railway.internal:3001/api/users/:id" + id)
+                .uri("http://users.railway.internal:3001/api/user/:id" + id)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(BodyInserters.fromValue(user))
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
@@ -134,7 +134,7 @@ public class ESBController {
 
         try {
             String response = webClient.patch()
-                .uri("http://users.railway.internal:3001/api/users/:id" + id)
+                .uri("http://users.railway.internal:3001/api/user/:id" + id)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
                 .doOnError(error -> System.out.println("Error: " + error.getMessage()))
