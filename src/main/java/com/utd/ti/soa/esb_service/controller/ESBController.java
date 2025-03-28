@@ -101,7 +101,7 @@ public class ESBController {
 
         try {
             String response = webClient.patch()
-                .uri("http://users.railway.internal:3001/api/users/update/" + id)
+                .uri("http://users.railway.internal:3001/api/users/:id" + id)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(BodyInserters.fromValue(user))
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
@@ -117,7 +117,7 @@ public class ESBController {
     }
 
     // Endpoint para dar de baja lógica a un usuario
-    @PatchMapping("/deletedstatus/{id}")
+    @PatchMapping("/delete/{id}")
     public ResponseEntity<String> changeUserStatus(@PathVariable String id, 
         @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
         
@@ -131,7 +131,7 @@ public class ESBController {
 
         try {
             String response = webClient.patch()
-                .uri("http://users.railway.internal:3001/api/users/deletedstatus/" + id)
+                .uri("http://users.railway.internal:3001/api/users/:id" + id)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(String.class))
                 .doOnError(error -> System.out.println("Error: " + error.getMessage()))
